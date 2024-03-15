@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <title>GitHub Profiles</title>
+  <style>
+        
+    :root{
+      --p-2 : 2px;
+      --p-3 : 3px;
+      --p-4 : 4px;
+      --p-5 : 5px;
+      --p-6 : 6px;
+      --p-8 : 8px;
+      --p-10 : 10px;
+      --p-12 : 12px;
+      --p-14 : 14px;
+      --p-16 : 16px;
+      --p-18 : 18px;
+      --p-20 : 20px;
+      --p-24 : 24px;
+      
+      
+      
+      --c-1 : rgba(0, 32, 41,1);
+      --c-2 : rgba(0, 48, 61,1);
+      --c-3 : rgba(0, 64, 82,1);
+      --c-4 : rgba(0, 80, 102,1);
+      --c-5 : rgba(0, 96, 122,1);
+      
+      --c-w : rgb(255,255,255);
+      
+    }
+    .flex{
+      display: flex;
+    }
+    .flex-row{
+      flex-direction: row;
+    }
+    .flex-col{
+      flex-direction: column;
+    }
+    .my-auto{
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    *{
+      padding: 0px;
+      margin: 0px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    body{
+      width: 100vw;
+      background-color: var(--c-1);
+    }
+    section{
+      padding: 10px;
+    }
+    
+    .container{
+      background-color: transparent;
+    }
+    .search-bar{
+      padding-bottom: 20px;
+    }
+    form{
+      display: flex;
+      border-radius: var(--p-8);
+      border: 2px solid var(--c-3);
+      
+    }
+    
+    form .ri-search-line{
+      color: var(--c-3);
+      margin: auto;
+      padding-left: 10px;
+    }
+    
+    form input{
+      width: 100%;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      font-size: 20px;
+      padding: 10px 10px;
+      color: white;
+    }
+    form input::placeholder{
+      color: var(--c-3);
+    }
+    
+    .search-bar button {
+      border: none;
+      font-size: var(--p-18);
+      color: var(--c-w);
+      padding: 5px 10px;
+      background-color: var(--c-3);
+      border-top-right-radius: var(--p-6);
+      border-bottom-right-radius: var(--p-6);
+    }
+    .profile-card{
+      background-color: var(--c-3);
+      padding: var(--p-12);
+      border-radius: var(--p-14);
+      color: lightgray;
+      margin-bottom: var(--p-20);
+    }
+    .personal-card{
+      display: flex;
+      margin-bottom: var(--p-10);
+    }
+    .profile-details{
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .profile-details h1{
+      line-height: 24px;
+      font-size: var(--p-24);
+    }
+    .profile-details a{
+      text-decoration: none;
+      color: inherit;
+      
+    }
+    .profile-details p{
+      margin-top: var(--p-3);
+    }
+    
+    .avatar{
+      border-radius: var(--p-8);
+      height: 80px;
+      width: 80px;
+      margin-right: 10px;
+    }
+    .social-links{
+      margin-top: var(--p-3);
+      grid-gap: 10px;
+    }
+    i{
+      margin-right: var(--p-5);
+    }
+    .bio{
+      margin-top: var(--p-5);
+    }
+    
+    .profile-statics{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 0.6rem;
+      margin-top: var(--p-14);
+    }
+    @media only screen and (max-width: 600px) {
+      .profile-statics{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.6rem;
+        margin-top: var(--p-14);
+      }
+    }
+    .profile-statics div{
+      background-color: var(--c-1);
+      padding: var(--p-6);
+      border-radius: var(--p-8);
+}
+    
+    
+    .statics-icon{
+      padding: var(--p-6);
+      background-color: var(--c-2);
+      display: inline-block;
+      border-radius: var(--p-5);
+      margin-right: var(--p-5);
+      color: var(--c-5);
+    }
+    .profile-analytics{
+      background-color: var(--c-3);
+      padding: var(--p-12);
+      border-radius: var(--p-14);
+      color: lightgray;
+      margin-bottom: var(--p-20);
+      
+    }
+    
+    .profile-analytics h3{
+      background-color: var(--c-2);
+      border-radius: var(--p-8);
+      padding: var(--p-12);
+      margin-bottom: var(--p-10);
+      text-align: center;
+      color: var(--c-w);
+    }
+    .profile-analytics div{
+      gap: var(--p-12);
+    }
+    
+    .profile-analytics div img{
+      border-radius: var(--p-8);
+    }
+    
+    .profile-repos{
+      background-color: var(--c-3);
+      padding: var(--p-12);
+      border-radius: var(--p-14);
+      color: lightgray;
+      margin-bottom: var(--p-20);
+    }
+    
+    .repos-card{
+      border-radius: var(--p-8);
+      
+    }
+    .buttons div{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 0.6rem;
+      background-color: var(--c-1);
+      border-radius: var(--p-8);
+      padding: var(--p-12);
+      margin-top: var(--p-10);
+    }
+    .repos-card .buttons button{
+      padding: var(--p-6) var(--p-12);
+      font-size: var(--p-16);
+      border: none;
+      border-radius: var(--p-4);
+      background-color: var(--c-5);
+    }
+    .none{
+      display: none;
+      
+    }
+    .strech{
+      display: inline-block;
+      transform:scale(1.1,0.9);
+      
+    }
+    #displayRepos h3{
+      background-color: var(--c-3);
+      border-radius: var(--p-8);
+      padding: var(--p-12);
+      margin-bottom: var(--p-10);
+      text-align: center;
+      color: var(--c-w);
+    }
+    
+  </style>
+</head>
+<body>
+  <section class="">
+    <div class="container">
+      
+      
+      <div class="search-bar">
+        <form id="myForm">
+          <i class="ri-search-line ri-2x"></i>
+          <input type="input" name="search" id="search" placeholder="Enter username" />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      
+      <div id="myCard">
+        <!-- Profile  append here -->
+      </div>
+      
+      
+      
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+  <script>
+  
+  
+  
+  document.getElementById('myForm').addEventListener('click', 
+    function(event) {
+        event.preventDefault() , get_data() ;
+      
+    });
+  
+  async function get_data(){
+    
+      let username = search.value || "Tegorinternational";
+      let url = 'https://api.github.com/users/' + username;
+     //let url = '/userdata.json';
+      let response = await fetch(url);
+      let data = await response.json();
+     // console.log(data);
+      
+      
+      
+      if (data.message !== "Not Found")
+      {
+        
+        
+  const joined = (new Date(data.created_at));
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const today = new Date();
+  const dd = joined.getDate();
+  const mm = months[joined.getMonth()];
+  const yyyy = joined.getFullYear();
+  var views = null;
+  //const views = "https://komarev.com/ghpvc/?username="+username+"&color=blue&style=flat-square";
+  const html = `
+  
+  
+  
+  <div class="profile-card">
+    <div class="personal-card">
+      <img class="avatar" src="${data.avatar_url || "https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" }" alt="">
+      <div class="profile-details">
+        <h1>${data.name || "No name available"}</h1>
+        <a href="!#">${data.login || "No username available"}</a>
+        <p>Joined ${ dd + " " + mm + " " + yyyy || "00/00/0000" }</p>
+        <div class="social-links flex">
+          <p><i class="ri-map-pin-line ri-lg"></i>${data.location || "No location" }</p>
+          <p><i class="ri-link ri-lg"></i><a href="${data.blog}">Website</a></p>
+          <p><i class="ri-twitter-x-line ri-1x"></i>${data.twitter_username || "No Twitter"}</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="bio-box">
+      <p><i class="ri-building-line ri-lg"></i>${data.company || "No company Available" }</p>
+      <p><i class="ri-mail-line ri-lg strech"></i>${data.email || "No email Available" }</p>
+      <p class="bio">${data.bio || "No Bio Available" }</p>
+      <img class="none" src="${views || "https://source.unsplash.com/100x20?random"}" alt="">
+      
+    </div>
+  
+  
+  
+    <div class="profile-statics ">
+      <div class="flex flex-row">
+        <p class="statics-icon">
+          <i class="ri-git-repository-line ri-2x"></i>
+        </p>
+        <p class="flex flex-col my-auto">
+          <span>Repositories</span>
+          <span>${data.public_repos || "0"}</span>
+        </p>
+      </div>
+      <div class="flex flex-row">
+        <p class="statics-icon">
+          <i class="ri-star-line ri-2x"></i>
+        </p>
+        <p class="flex flex-col my-auto">
+          <span>Stars</span>
+          <span id="str">0</span>
+        </p>
+      </div>
+      <div class="flex flex-row">
+        <p class="statics-icon">
+          <i class="ri-user-follow-line ri-2x"></i>
+        </p>
+        <p class="flex flex-col my-auto">
+          <span>Followers</span>
+          <span>${data.followers || "0"}</span>
+        </p>
+      </div>
+      <div class="flex flex-row">
+        <p class="statics-icon">
+          <i class="ri-user-heart-line ri-2x"></i>
+        </p>
+        <p class="flex flex-col my-auto">
+          <span>Following</span>
+          <span>${data.following || "0"}</span>
+        </p>
+      </div>
+    </div>
+  
+  </div>
+  
+  
+  <div class="profile-analytics">
+  <h3>Analytics</h3>
+    <div class="flex flex-col">
+      <img width="100%" align="center" src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&locale=en" alt="tegorinternational" />
+  
+      <img width="100%" align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=${username}&" alt="tegorinternational" />
+  
+      <img width="100%" align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=${username}&show_icons=true&locale=en&layout=compact" alt="tegorinternational" />
+  
+    </div>
+  </div>
+
+     
+  <div id="displayRepos">
+  <h3>Repositories</h3>
+  <ol id="repoList"></ol>
+  </div>
+
+  `;
+
+  
+  document.getElementById("myCard").innerHTML = html;
+  
+  
+  const repoList = document.getElementById("repoList");
+  
+  
+  
+  
+  
+  const repos = await fetch(data.repos_url).then(response => response.json());
+  
+  let totalStarsCount = 0;
+  
+  repos.forEach(repo => {
+    totalStarsCount += repo.stargazers_count;
+    document.getElementById("str").innerText = totalStarsCount;
+    const reposStar = repo.stargazers_count;
+    const githubPages = repo.has_pages ? `https://${username}.github.io/${repo.name}/` : null;
+    const environmentsUrl = repo.environments_url ? `https://github.com/${username}/${repo.name}/environments` : null;
+    
+    var releases = repo.releases_url ? getReleases(repo.releases_url) : [];
+    var releaseLabel = releases.length > 0 ? 'Releases: ' + releases[0].tag_name : 'No releases';
+
+    const repoItem = document.createElement("div");
+
+    repoItem.innerHTML = `
+    <div class="profile-repos">
+      <div class="">
+        <div class="repos-card">
+          <h1>${repo.name}</h1>
+          <p>${repo.description || "No description available"}</p>
+          <p><i class="ri-price-tag-line ri-1x"></i> ${releaseLabel}</p>
+          <p><i class="ri-star-line ri-1x"></i>${reposStar}</p>
+          <p>${repo.releases_url} <br/>
+          ${releaseLabel} <br>
+          ${releases}
+          </p>
+          <div class="buttons">
+            <!--button onclick="window.open('${repo.html_url}', '_blank')">Repo Link</button>
+            <button onclick="window.open('${githubPages}', '_blank')">GitHub Pages</button>
+            <button onclick="window.open('${repo.homepage}', '_blank')">Published Link</button>
+            <button onclick="window.open('${environmentsUrl}', '_blank')">Environments</button-->
+          </div>
+        </div>
+      </div>
+    </div>
+`;
+
+    const repoList = document.getElementById("repoList");
+    repoList.appendChild(repoItem);
+    
+    const buttonsDiv = repoItem.querySelector(".buttons"); // select the buttons div inside repoItem
+    const repoCreatedDiv = document.createElement("div");
+    repoCreatedDiv.innerHTML = `<!--Blank Render-->`;
+          
+          repoCreatedDiv.innerHTML += `<button onclick="window.open('${repo.html_url}', '_blank')">Repo Link <i class="ri-arrow-right-up-line ri-lg"></i></button>`;
+    
+          if (githubPages) {
+            repoCreatedDiv.innerHTML += `<button onclick="window.open('${githubPages}', '_blank')">GitHub Pages <i class="ri-arrow-right-up-line ri-lg"></i></button>`;
+          }
+    
+          if (repo.homepage) {
+            repoCreatedDiv.innerHTML += `<button onclick="window.open('${repo.homepage}', '_blank')">Published Link <i class="ri-arrow-right-up-line ri-lg"></i></button>`;
+          }
+    
+          if (environmentsUrl) {
+            repoCreatedDiv.innerHTML += `<button onclick="window.open('${environmentsUrl}', '_blank')">Environments <i class="ri-arrow-right-up-line ri-lg"></i></button>`;
+          }
+    
+    
+    
+    
+    buttonsDiv.appendChild(repoCreatedDiv);
+});
+
+  
+      }
+      else{
+        
+ const notFoundHtml = `
+   <div class="dd">
+       <img class="" width="80px" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="" />
+       <h1>User Data Not Found</h1>
+   </div>
+   `;
+ 
+ document.getElementById("myCard").innerHTML = notFoundHtml;
+        
+        
+        
+        
+      }
+  }
+  
+  function getReleases(releasesUrl) {
+                var apiUrl = releasesUrl.replace('{/id}', '');
+                var releases = [];
+
+                $.ajax({
+                    url: apiUrl,
+                    async: false,
+                    success: function(data) {
+                        releases = data;
+                    }
+                });
+
+                return releases;
+            }
+
+  get_data();
+  
+  
+  </script>
+  
+  
+  
+  
+</body>
+</html>
