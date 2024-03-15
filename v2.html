@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    
+    body{
+      width: 100vw;
+      height: 100vh;
+      background-color: darkgray;
+    }
+    .profileContainer{
+      
+      padding: 10px;
+      margin: 10px 0px;
+      background-color: white;
+      border-radius: 30px;
+      overflow-y: hidden;
+      
+      
+      
+    }
+    #myCard{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      
+    }
+    .avatar{
+      width: 80px;
+      border-radius: 100%;
+      border: 1px solid;
+    }
+    
+    #displayRepos{
+      height: 400px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      overflow: hidden;
+      padding-bottom: 50px;
+    }
+    #repoList{
+      background-color: darkgray;
+      border-radius: 20px;
+      padding: 10px;
+      height: 100%;
+      overflow: scroll;
+    }
+  </style>
+</head>
+<body>
+  
+ <!--  <ruby>
+    Rurendra Tegor 
+    <rp><rt>Firstname</rt></rp>
+  </ruby-->
+  
+  <!--input type="search" name="search" id="search" onchange="get_data()"/-->
+  
+  <form id="myForm">
+    <input type="input" name="search" id="search"/>
+    <button type="submit" >Search</button>
+  </form>
+  
+  
+  <div id="myCard">
+    
+  </div>
+  
+
+
+  <script>
+  
+  document.getElementById('myForm').addEventListener('click', 
+    function(event) {
+        event.preventDefault() , get_data() ;
+      
+    });
+  
+  async function get_data(){
+    
+      let username = search.value || "Tegorinternational";
+      let url = 'https://api.github.com/users/' + username;
+      let response = await fetch(url);
+      let data = await response.json();
+      
+      //name = data.login;
+      console.log(data);
+      
+      
+      
+      if (data.message !== "Not Found")
+      {
+        
+        
+  const joined = (new Date(data.created_at));
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const today = new Date();
+  const dd = joined.getDate();
+  const mm = months[joined.getMonth()];
+  const yyyy = joined.getFullYear();
+  var views = null;
+  //const views = "https://komarev.com/ghpvc/?username="+username+"&color=blue&style=flat-square";
+  const html = `
+  <div class="profileContainer">
+      <img class="avatar" src="${data.avatar_url}" alt="" />
+      <h2>${data.name}</h2>
+      <h4>${data.login}</h4>
+      <span>Repos: ${data.public_repos}</span><span>Followers: ${data.followers}</span> <span>Following: ${data.following}</span>
+      <p>${data.bio || "No Bio Available" }</p>
+      <p>${data.company || "No Company Available" }</p>
+      <p>${data.location || "No location Available" }</p>
+      <p>${data.blog || "No Company Available" }</p>
+      <p>${data.twitter_username || "No Company Available" }</p>
+      <p>Joined: ${ dd + " " + mm + " " + yyyy }</p>
+      <p>${data.email || "No email Available" }</p>
+      <img src="${views || "https://source.unsplash.com/100x20?random"}" alt="">
+      
+      <p>${data.email || "No view Available" }</p>
+       <p id="str"><p>
+      
+      <p><img width="100%" align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=${username}&show_icons=true&locale=en&layout=compact" alt="tegorinternational" /></p>
+     
+
+<p><img width="100%" align="center" src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&locale=en" alt="tegorinternational" /></p>
+
+<p><img width="100%" align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=${username}&" alt="tegorinternational" /></p>
+
+
+
+     
+  <div id="displayRepos">
+  <h3>Repositories:</h3>
+  <ol id="repoList"></ol>
+</div>
+
+      
+      
+      
+  </div>
+  `;
+
+  
+  document.getElementById("myCard").innerHTML = html;
+  
+  
+  const repoList = document.getElementById("repoList");
+  
+  
+  
+  const repos = await fetch(data.repos_url).then(response => response.json());
+  
+  let totalStarsCount = 0;
+  
+  repos.forEach(repo => {
+    
+    totalStarsCount += repo.stargazers_count;
+    document.getElementById("str").innerText = totalStarsCount;
+    
+    const githubPages = repo.has_pages ? `https://${username}.github.io/${repo.name}/` : null;
+    
+    const readmeMd = repo.has_pages ? `https://${username}.github.io/${repo.name}/readme.Md` : null;
+    
+    
+    const environmentsUrl = repo.environments_url ? `https://github.com/${username}/${repo.name}/environments` : null;
+    
+    
+    
+    
+    const repoItem = document.createElement("div");
+    repoItem.innerHTML = `
+      <h1>${repo.name}</h1>
+      <p>${repo.description || "No description available"}</p>
+      <p>No releases</p>
+      <a href="${readmeMd}">${readmeMd}</a>
+      <button onclick="window.open('${repo.html_url}', '_blank')">Repo Link</button>`;
+      
+      if (githubPages) {
+        repoItem.innerHTML += `<button onclick="window.open('${githubPages}', '_blank')">GitHub Pages</button>`;
+      }
+      
+      if (repo.homepage) {
+        repoItem.innerHTML += `<button onclick="window.open('${repo.homepage}', '_blank')">Published Link</button>`;
+      }
+      
+      if (environmentsUrl) {
+          repoItem.innerHTML += `<button onclick="window.open('${environmentsUrl}', '_blank')">Environments</button>`;
+                    }
+      
+    
+    repoList.appendChild(repoItem);
+  });
+
+  
+
+  
+  
+  
+  
+      }
+  else{
+        
+ 
+ const notFoundHtml = `
+   <div class="dd">
+       <img class="" width="80px" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="" />
+       <h1>User Data Not Found</h1>
+   </div>
+   `;
+ 
+ document.getElementById("myCard").innerHTML = notFoundHtml;
+        
+        
+        
+        
+      }
+  }
+  get_data();
+  
+  </script>
+  
+  
+</body>
+</html>
